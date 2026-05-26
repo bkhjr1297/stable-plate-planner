@@ -19,9 +19,10 @@ A free static low-glycemic meal planning tool for people who want:
 Start free, then add manual services:
 
 1. Free tool attracts users.
-2. Offer a custom 7-day stable plate rotation.
-3. Deliver plans manually through email/DM/PDF.
-4. Later add Gumroad/Ko-fi/Stripe payment once there is demand.
+2. Offer a custom 7-day stable plate rotation through GitHub Issues intake (zero-cost lead capture).
+3. Send payment instructions manually after reviewing the request.
+4. Deliver plans manually through email/DM/PDF.
+5. Later add Gumroad/Ko-fi/Stripe payment once there is demand.
 
 Suggested first offer:
 

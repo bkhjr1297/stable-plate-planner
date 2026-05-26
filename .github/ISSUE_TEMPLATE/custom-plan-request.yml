@@ -1,0 +1,83 @@
+name: Custom Stable Plate Plan Request
+description: Request a personalized low-glycemic meal plan.
+title: "Custom plan request: [your first name or initials]"
+labels: ["custom-plan-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for requesting a custom Stable Plate Plan. Please do not include private medical data, insulin dosing details, full address, payment details, or anything you would not want visible on GitHub.
+
+        This is educational meal-planning support only, not medical advice. Follow your clinician's diabetes care plan.
+  - type: dropdown
+    id: plan_type
+    attributes:
+      label: Plan type
+      options:
+        - 3-day starter plan — $9
+        - 7-day stable plate plan — $19
+        - Monthly refresh — $39
+        - I want to ask a question first
+    validations:
+      required: true
+  - type: input
+    id: contact
+    attributes:
+      label: Best contact method
+      description: Email, Telegram handle, or another contact method. Do not post anything sensitive.
+      placeholder: "example@email.com or @username"
+    validations:
+      required: true
+  - type: dropdown
+    id: goal
+    attributes:
+      label: Main goal
+      options:
+        - Steady energy / stable blood sugar
+        - Weight loss support
+        - Muscle / high-protein support
+        - Budget grocery plan
+        - Very low prep / low energy plan
+    validations:
+      required: true
+  - type: textarea
+    id: likes
+    attributes:
+      label: Foods you like
+      placeholder: "Chicken, eggs, tuna, Greek yogurt, berries, rice, etc."
+    validations:
+      required: true
+  - type: textarea
+    id: avoids
+    attributes:
+      label: Foods you avoid or cannot eat
+      placeholder: "Dairy, fish, eggs, pork, nuts, etc."
+    validations:
+      required: false
+  - type: dropdown
+    id: cooking_access
+    attributes:
+      label: Cooking access
+      options:
+        - No cooking / ready-to-eat only
+        - Microwave only
+        - Stove/oven
+        - Air fryer
+        - Full kitchen
+    validations:
+      required: true
+  - type: input
+    id: budget
+    attributes:
+      label: Approximate grocery budget
+      placeholder: "$40/week, $75/week, etc."
+    validations:
+      required: false
+  - type: textarea
+    id: notes
+    attributes:
+      label: Extra notes
+      description: Keep this general. Do not include medication doses or private medical records.
+      placeholder: "Schedule, meal timing, training days, family size, preferred stores, etc."
+    validations:
+      required: false

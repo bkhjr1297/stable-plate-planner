@@ -74,7 +74,7 @@
     <div class="wrap"><nav>
       <div class="brand"><div class="sigil"></div><span>Stable Plate Planner</span></div>
       <div class="navlinks"><a href="#planner">Planner</a><a href="#guide">Guide</a><a href="#contact">Custom Plan</a></div>
-      <a class="btn secondary" href="#planner">Use Free Tool</a>
+      <a class="btn secondary" href="https://github.com/bkhjr1297/stable-plate-planner/issues/new?template=custom-plan-request.yml">Request Custom Plan</a>
     </nav></div>
   </header>
 
@@ -84,7 +84,7 @@
         <div class="eyebrow">Free • No login • Built for stable energy</div>
         <h1>Build simple low-glycemic meals in 60 seconds.</h1>
         <p class="lead">A calm, practical meal builder for high-protein plates, cleaner grocery lists, and fewer blood-sugar surprises. Start with what you need today: breakfast, lunch, dinner, or emergency stable snack.</p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="#planner">Generate a plate</a><a class="btn secondary" href="#guide">Read the 3-rule method</a></div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="#planner">Generate a plate</a><a class="btn secondary" href="https://github.com/bkhjr1297/stable-plate-planner/issues/new?template=custom-plan-request.yml">Request a $19 custom plan</a></div>
       </div>
       <div class="hero-card">
         <div class="screen">
@@ -138,10 +138,20 @@
 
     <section id="contact"><div class="wrap">
       <div class="card">
+        <div class="eyebrow">First monetization path</div>
         <h2 class="section-title">Want a custom 7-day stable plate rotation?</h2>
-        <p class="muted">This is the zero-dollar business path: offer a simple personalized plan using this free tool as proof of value. First manual service can be delivered by email/DM as a PDF or plain text plan.</p>
-        <textarea id="intake" placeholder="Copy this and send it to request a custom plan:\n1. Goal: steady energy / weight loss / muscle / budget\n2. Foods I like:\n3. Foods I avoid:\n4. Cooking access: microwave / stove / air fryer / none\n5. Typical grocery budget:\n6. Diabetes considerations I already follow from my clinician:"></textarea>
-        <button class="btn secondary" onclick="copyIntake()">Copy intake template</button>
+        <p class="muted">The free generator gives quick ideas. The paid custom plan is built around your foods, budget, cooking access, schedule, and preferences.</p>
+        <div class="grid" style="margin:18px 0">
+          <div class="meal"><h4>3-day starter</h4><p class="muted">A small customized rotation to test fit.</p><strong>$9</strong></div>
+          <div class="meal"><h4>7-day stable plate plan</h4><p class="muted">Full week plan plus grocery list.</p><strong>$19</strong></div>
+          <div class="meal"><h4>Monthly refresh</h4><p class="muted">Updated plan after feedback.</p><strong>$39</strong></div>
+        </div>
+        <p class="warning">Launch note: requests are collected first, then payment instructions are sent manually. Do not post private medical records, insulin dosing details, addresses, or payment details.</p>
+        <textarea id="intake" placeholder="Copy this if you prefer to send the request manually:\n1. Plan: 3-day / 7-day / monthly refresh\n2. Contact method:\n3. Goal: steady energy / weight loss / muscle / budget\n4. Foods I like:\n5. Foods I avoid:\n6. Cooking access: microwave / stove / air fryer / none\n7. Typical grocery budget:\n8. General notes, no private medical details:"></textarea>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px">
+          <a class="btn" href="https://github.com/bkhjr1297/stable-plate-planner/issues/new?template=custom-plan-request.yml">Request custom plan</a>
+          <button class="btn secondary" onclick="copyIntake()">Copy intake template</button>
+        </div>
       </div>
     </div></section>
   </main>
