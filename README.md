@@ -59,3 +59,19 @@ This is educational meal planning support only. It is not medical advice, insuli
 - [ ] Share in 3 relevant communities without spam.
 - [ ] Ask first 5 users what meals they actually need.
 - [ ] Convert feedback into the first paid custom-plan offer.
+
+## Zero-dollar venture framework
+
+This repository is now the template for weekly $0 upfront ventures:
+
+- Static free artifact first.
+- Blog/content spine for SEO.
+- `sitemap.xml` and `robots.txt` for discovery.
+- Manual paid offer before complex automation.
+- Free GitHub Actions automation where useful.
+
+See `framework/zero-dollar-venture-framework.md`.
+
+## Daily content engine
+
+The blog lives in `blog/`. A free GitHub Actions workflow runs daily and uses `scripts/generate_daily_blog.py` to add one practical stable-plate SEO post, then rebuilds the blog index and sitemap.

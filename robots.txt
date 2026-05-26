@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bkhjr1297.github.io/stable-plate-planner/sitemap.xml
