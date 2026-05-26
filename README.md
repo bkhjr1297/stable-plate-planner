@@ -78,3 +78,8 @@ See `framework/zero-dollar-venture-framework.md`.
 ## Daily content engine
 
 The blog lives in `blog/`. A free GitHub Actions workflow runs daily and uses `scripts/generate_daily_blog.py` to add one practical stable-plate SEO post, then rebuilds the blog index and sitemap.
+
+
+## AdSense path
+
+This venture is AdSense-ready but ads are not active yet. Brian must complete Google AdSense account approval, payout, tax, identity, and policy steps directly. Once Brian provides the approved Publisher ID and ad-slot ID, replace the inactive placeholders in `index.html`. See `adsense/SETUP_CHECKLIST.md`.
