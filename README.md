@@ -16,13 +16,13 @@ A free static low-glycemic meal planning tool for people who want:
 
 ## Monetization path
 
-Start free, then add manual services:
+Start free, then offer a paid custom plan through Gumroad:
 
 1. Free tool attracts users.
-2. Offer a custom 7-day stable plate rotation through GitHub Issues intake (zero-cost lead capture).
-3. Send payment instructions manually after reviewing the request.
+2. Offer a custom 7-day stable plate rotation through Gumroad checkout.
+3. Review the buyer's intake details.
 4. Deliver plans manually through email/DM/PDF.
-5. Later add Gumroad/Ko-fi/Stripe payment once there is demand.
+5. Use customer feedback to decide whether to add more tiers later.
 
 Suggested first offer:
 
@@ -30,7 +30,7 @@ Suggested first offer:
 - **$19 custom 7-day stable plate plan**
 - **$39 monthly refresh**
 
-No paid tools are required to begin. If there is no payment account yet, collect interest first with a contact form or direct message link.
+No paid tools are required to begin. The live checkout is: https://harmonious54.gumroad.com/l/stable-plate-plan
 
 ## Free deployment options
 
