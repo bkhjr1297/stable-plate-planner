@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stable Plate Planner — Low-Glycemic Meal Builder</title>
+  <meta name="description" content="A free, no-login low-glycemic meal planning tool for people who want stable energy, high protein meals, and simple grocery lists." />
+  <style>
+    :root {
+      --bg: #07110d;
+      --panel: #0d1c16;
+      --panel2: #12281f;
+      --text: #ecfff5;
+      --muted: #a9c8b8;
+      --gold: #e7b85f;
+      --green: #4ade80;
+      --line: rgba(236,255,245,.12);
+      --danger: #fb7185;
+      --shadow: 0 24px 80px rgba(0,0,0,.35);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(74,222,128,.16), transparent 28rem),
+        radial-gradient(circle at 85% 0%, rgba(231,184,95,.18), transparent 24rem),
+        linear-gradient(180deg, #06100c 0%, #08140f 50%, #050907 100%);
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    header { padding: 22px 0; border-bottom: 1px solid var(--line); position: sticky; top: 0; backdrop-filter: blur(16px); background: rgba(7,17,13,.72); z-index: 5; }
+    nav { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .brand { display:flex; align-items:center; gap:10px; font-weight: 800; letter-spacing: -.03em; }
+    .sigil { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--green), var(--gold)); box-shadow: 0 0 30px rgba(74,222,128,.25); }
+    .navlinks { display:flex; gap:18px; color: var(--muted); font-size: 14px; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; border: 1px solid rgba(231,184,95,.45); color:#1b1202; background: linear-gradient(135deg, #f7d98d, #e7b85f); padding: 12px 18px; border-radius: 999px; font-weight: 800; text-decoration:none; box-shadow: 0 12px 34px rgba(231,184,95,.18); cursor: pointer; }
+    .btn.secondary { background: transparent; color: var(--text); border-color: var(--line); box-shadow: none; }
+    .hero { padding: 70px 0 44px; display:grid; grid-template-columns: 1.08fr .92fr; gap: 36px; align-items:center; }
+    .eyebrow { display:inline-flex; border:1px solid rgba(74,222,128,.28); background: rgba(74,222,128,.08); color:#bfffd4; padding:7px 12px; border-radius:999px; font-size:13px; font-weight:700; margin-bottom: 18px; }
+    h1 { font-size: clamp(42px, 7vw, 78px); line-height:.92; letter-spacing:-.075em; margin:0 0 20px; }
+    .lead { font-size: clamp(18px, 2vw, 22px); color: var(--muted); line-height:1.55; max-width: 680px; margin:0 0 28px; }
+    .hero-card { background: linear-gradient(180deg, rgba(18,40,31,.92), rgba(13,28,22,.92)); border:1px solid var(--line); border-radius: 28px; padding: 24px; box-shadow: var(--shadow); }
+    .screen { border:1px solid var(--line); border-radius: 20px; background: #06100c; padding: 18px; }
+    .metric { display:flex; justify-content:space-between; gap:16px; padding:14px 0; border-bottom:1px solid var(--line); color:var(--muted); }
+    .metric strong { color: var(--text); }
+    .bar { height: 10px; background: #10231b; border-radius:999px; overflow:hidden; margin-top:12px; }
+    .bar span { display:block; height:100%; width:74%; background: linear-gradient(90deg, var(--green), var(--gold)); border-radius:999px; }
+    section { padding: 46px 0; }
+    .section-title { font-size: clamp(28px, 4vw, 46px); line-height:1; letter-spacing:-.05em; margin:0 0 12px; }
+    .muted { color: var(--muted); line-height:1.6; }
+    .grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { background: rgba(13,28,22,.78); border:1px solid var(--line); border-radius: 22px; padding: 22px; }
+    .card h3 { margin:0 0 8px; letter-spacing:-.02em; }
+    .planner { display:grid; grid-template-columns: .85fr 1.15fr; gap: 18px; align-items:start; }
+    label { display:block; color: var(--muted); font-size: 13px; font-weight: 750; margin: 14px 0 7px; }
+    select, input { width:100%; padding: 13px 14px; color: var(--text); background:#07120e; border:1px solid var(--line); border-radius: 14px; outline:none; }
+    .result { min-height: 360px; }
+    .meal { border:1px solid var(--line); border-radius:18px; padding:16px; margin-bottom:12px; background:rgba(6,16,12,.65); }
+    .meal h4 { margin:0 0 8px; color:#d8ffd9; }
+    .tags { display:flex; flex-wrap:wrap; gap:7px; margin-top:10px; }
+    .tag { font-size:12px; padding:5px 8px; border-radius:999px; border:1px solid rgba(74,222,128,.25); color:#c8ffd8; background:rgba(74,222,128,.08); }
+    .warning { border-left: 3px solid var(--gold); padding: 12px 14px; background: rgba(231,184,95,.08); color:#f5e3b8; border-radius: 12px; font-size: 14px; }
+    footer { padding: 36px 0 60px; color: var(--muted); border-top:1px solid var(--line); }
+    textarea { width: 100%; min-height: 150px; resize: vertical; border:1px solid var(--line); border-radius:16px; background:#07120e; color: var(--text); padding: 14px; }
+    @media (max-width: 860px) { .hero, .planner { grid-template-columns:1fr; } .grid { grid-template-columns:1fr; } .navlinks { display:none; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap"><nav>
+      <div class="brand"><div class="sigil"></div><span>Stable Plate Planner</span></div>
+      <div class="navlinks"><a href="#planner">Planner</a><a href="#guide">Guide</a><a href="#contact">Custom Plan</a></div>
+      <a class="btn secondary" href="#planner">Use Free Tool</a>
+    </nav></div>
+  </header>
+
+  <main>
+    <div class="wrap hero">
+      <div>
+        <div class="eyebrow">Free • No login • Built for stable energy</div>
+        <h1>Build simple low-glycemic meals in 60 seconds.</h1>
+        <p class="lead">A calm, practical meal builder for high-protein plates, cleaner grocery lists, and fewer blood-sugar surprises. Start with what you need today: breakfast, lunch, dinner, or emergency stable snack.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="#planner">Generate a plate</a><a class="btn secondary" href="#guide">Read the 3-rule method</a></div>
+      </div>
+      <div class="hero-card">
+        <div class="screen">
+          <div class="metric"><span>Plate structure</span><strong>Protein + fiber + slow carb</strong></div>
+          <div class="metric"><span>Hidden sugar screen</span><strong style="color:var(--green)">Active</strong></div>
+          <div class="metric"><span>Prep complexity</span><strong>Low</strong></div>
+          <div class="bar"><span></span></div>
+          <p class="muted" style="margin-bottom:0">Designed for planning support only. Always follow your clinician’s guidance for diabetes care, medication, and emergencies.</p>
+        </div>
+      </div>
+    </div>
+
+    <section id="guide"><div class="wrap">
+      <h2 class="section-title">The 3-rule stable plate method</h2>
+      <p class="muted">This tool keeps the method intentionally simple so it can be used when energy is low.</p>
+      <div class="grid">
+        <div class="card"><h3>1. Anchor protein</h3><p class="muted">Start with eggs, chicken, turkey, fish, Greek yogurt, tofu, beans, or lean beef. Protein reduces random snacking and supports training.</p></div>
+        <div class="card"><h3>2. Add fiber volume</h3><p class="muted">Use greens, broccoli, peppers, cabbage, berries, avocado, chia, or lentils to slow digestion and increase fullness.</p></div>
+        <div class="card"><h3>3. Choose slow carbs carefully</h3><p class="muted">When carbs are needed, favor oats, beans, lentils, quinoa, sweet potato, berries, or small portions of brown rice.</p></div>
+      </div>
+    </div></section>
+
+    <section id="planner"><div class="wrap planner">
+      <div class="card">
+        <h2 class="section-title" style="font-size:34px">Meal generator</h2>
+        <p class="muted">Pick your situation and get a plate, snack, and grocery list.</p>
+        <label for="mealType">Meal window</label>
+        <select id="mealType">
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
+          <option value="snack">Emergency stable snack</option>
+        </select>
+        <label for="goal">Current priority</label>
+        <select id="goal">
+          <option value="steady">Steady blood sugar</option>
+          <option value="protein">High protein / training support</option>
+          <option value="budget">Lowest cost</option>
+          <option value="fast">Fastest prep</option>
+        </select>
+        <label for="avoid">Avoid / dislike</label>
+        <input id="avoid" placeholder="Example: eggs, fish, dairy" />
+        <button class="btn" style="width:100%;margin-top:18px" onclick="generateMeal()">Generate meal plan</button>
+        <p class="warning">Medical note: this is not dosing advice. If blood glucose is dangerously high/low, use your prescribed plan and seek urgent help when appropriate.</p>
+      </div>
+      <div class="card result">
+        <h2 class="section-title" style="font-size:34px">Your stable plate</h2>
+        <div id="output" class="muted">Choose your settings and generate a meal.</div>
+      </div>
+    </div></section>
+
+    <section id="contact"><div class="wrap">
+      <div class="card">
+        <h2 class="section-title">Want a custom 7-day stable plate rotation?</h2>
+        <p class="muted">This is the zero-dollar business path: offer a simple personalized plan using this free tool as proof of value. First manual service can be delivered by email/DM as a PDF or plain text plan.</p>
+        <textarea id="intake" placeholder="Copy this and send it to request a custom plan:\n1. Goal: steady energy / weight loss / muscle / budget\n2. Foods I like:\n3. Foods I avoid:\n4. Cooking access: microwave / stove / air fryer / none\n5. Typical grocery budget:\n6. Diabetes considerations I already follow from my clinician:"></textarea>
+        <button class="btn secondary" onclick="copyIntake()">Copy intake template</button>
+      </div>
+    </div></section>
+  </main>
+
+  <footer><div class="wrap">Stable Plate Planner is an educational planning tool, not medical advice. © 2026</div></footer>
+
+  <script>
+    const meals = {
+      breakfast: [
+        {name:'Greek yogurt power bowl', protein:'Plain Greek yogurt + chia', fiber:'berries + walnuts', carb:'small oats portion', groceries:['plain Greek yogurt','chia seeds','blueberries','walnuts','old-fashioned oats'], tags:['no cook','high protein','fiber']},
+        {name:'Egg avocado plate', protein:'eggs or egg whites', fiber:'avocado + spinach', carb:'one small sprouted-grain toast', groceries:['eggs','avocado','spinach','sprouted-grain bread'], tags:['fast','savory','low sugar']},
+        {name:'Cottage cheese berry bowl', protein:'cottage cheese', fiber:'berries + ground flax', carb:'optional small apple', groceries:['cottage cheese','strawberries','ground flax','apple'], tags:['budget','no cook','protein']}
+      ],
+      lunch: [
+        {name:'Chicken greens bowl', protein:'grilled chicken', fiber:'large salad greens + cucumbers', carb:'beans or quinoa', groceries:['chicken breast','mixed greens','cucumber','black beans','olive oil'], tags:['meal prep','steady','lean']},
+        {name:'Tuna avocado lettuce wraps', protein:'tuna', fiber:'romaine + avocado', carb:'optional lentil soup side', groceries:['tuna packets','romaine','avocado','lentil soup','pickles'], tags:['cheap','fast','portable']},
+        {name:'Turkey bean chili bowl', protein:'lean turkey', fiber:'beans + tomato + peppers', carb:'beans only', groceries:['lean turkey','kidney beans','tomatoes','bell peppers','chili spice'], tags:['batch cook','budget','filling']}
+      ],
+      dinner: [
+        {name:'Salmon broccoli plate', protein:'salmon', fiber:'broccoli + side salad', carb:'sweet potato half', groceries:['salmon','broccoli','salad greens','sweet potato'], tags:['omega-3','training','clean']},
+        {name:'Chicken fajita bowl', protein:'chicken thighs or breast', fiber:'peppers + onions + lettuce', carb:'small brown rice or beans', groceries:['chicken','bell peppers','onion','lettuce','brown rice'], tags:['family friendly','meal prep','high protein']},
+        {name:'Tofu vegetable stir-fry', protein:'tofu', fiber:'mixed vegetables', carb:'cauliflower rice or small quinoa', groceries:['extra-firm tofu','frozen stir-fry vegetables','cauliflower rice','quinoa'], tags:['plant-based','budget','fast']}
+      ],
+      snack: [
+        {name:'Protein rescue snack', protein:'string cheese or turkey slices', fiber:'cucumber + almonds', carb:'berries if needed', groceries:['string cheese','turkey slices','cucumber','almonds','berries'], tags:['emergency','portable','stable']},
+        {name:'Apple peanut butter guardrail', protein:'peanut butter', fiber:'apple', carb:'apple portion', groceries:['apple','natural peanut butter','cinnamon'], tags:['simple','cheap','no cook']},
+        {name:'Hard-boiled egg box', protein:'hard-boiled eggs', fiber:'baby carrots + hummus', carb:'small hummus portion', groceries:['eggs','baby carrots','hummus'], tags:['prep ahead','budget','steady']}
+      ]
+    };
+    function generateMeal(){
+      const type = document.getElementById('mealType').value;
+      const goal = document.getElementById('goal').value;
+      const avoid = document.getElementById('avoid').value.toLowerCase().split(',').map(s=>s.trim()).filter(Boolean);
+      let pool = meals[type].filter(m => !avoid.some(a => JSON.stringify(m).toLowerCase().includes(a)));
+      if(!pool.length) pool = meals[type];
+      let idx = goal === 'budget' ? pool.findIndex(m=>m.tags.includes('budget') || m.tags.includes('cheap')) : goal === 'fast' ? pool.findIndex(m=>m.tags.includes('fast') || m.tags.includes('no cook')) : goal === 'protein' ? pool.findIndex(m=>m.tags.includes('high protein') || m.tags.includes('protein')) : 0;
+      if(idx < 0) idx = 0;
+      const m = pool[idx];
+      document.getElementById('output').innerHTML = `
+        <div class="meal"><h4>${m.name}</h4>
+          <p><strong>Protein:</strong> ${m.protein}</p>
+          <p><strong>Fiber volume:</strong> ${m.fiber}</p>
+          <p><strong>Slow carb:</strong> ${m.carb}</p>
+          <div class="tags">${m.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        </div>
+        <div class="meal"><h4>Grocery list</h4><ul>${m.groceries.map(g=>`<li>${g}</li>`).join('')}</ul></div>
+        <button class="btn secondary" onclick="copyPlan()">Copy this plan</button>`;
+    }
+    function copyPlan(){ navigator.clipboard.writeText(document.getElementById('output').innerText); }
+    function copyIntake(){ navigator.clipboard.writeText(document.getElementById('intake').value || document.getElementById('intake').placeholder); }
+    generateMeal();
+  </script>
+</body>
+</html>
